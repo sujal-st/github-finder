@@ -63,13 +63,18 @@ function UserSearch() {
                     }} />
 
                     {showSuggestions && suggestions?.length > 0 && (
-                        <SuggestUsers suggestions={suggestions} onSelect={(username)=>{
-                            setUsername(username);
+                        <SuggestUsers suggestions={suggestions} onSelect={(selected) => {
+                            setUsername(selected);
                             setShowSuggestions(false);
 
-                            submittedUsername!=username ? setSubmittedUsername(username) : refetch();
+                            submittedUsername != selected ? setSubmittedUsername(selected) : refetch();
 
-                        }}/>
+                            setRecentUsers((prev) => {
+                                const updated = [selected, ...prev.filter((p) => p != selected)]
+                                return updated.slice(0, 5);
+                            })
+
+                        }} />
                     )}
                 </div>
                 <button type="submit">Search</button>
