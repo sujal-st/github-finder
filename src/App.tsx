@@ -1,4 +1,4 @@
-import UserSearch from "./components/userSearch";
+import UserSearch from "./components/UserSearch";
 
 function App() {
   return (
